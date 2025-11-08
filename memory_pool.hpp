@@ -1,4 +1,4 @@
-
+#include<string>
 namespace mp{
 
 class Memory_pool_int{
@@ -16,7 +16,7 @@ class Memory_pool_int{
         int* const get_next_int_ptr();
         void delete_int(int* const ptr);
         void delete_last_int();
-        void print_all_nums();
+        std::string print_all_nums();
         ~Memory_pool_int();
 
 };

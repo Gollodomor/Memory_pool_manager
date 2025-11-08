@@ -9,7 +9,7 @@ Memory_pool_int::Memory_pool_int(int size_of_pool = 1)
     , ptr_pool_list_{new int*[size_of_pool]}
     , iter_{0}
 {
-    std::cout << "Memory pool из " << size_of_pool_ << " элементов создан" << std::endl;
+    //std::cout << "Memory pool из " << size_of_pool_ << " элементов создан" << std::endl;
     for(int i = 0; i < size_of_pool_; i++)
     {
         ptr_pool_list_[i] = nullptr;
@@ -27,13 +27,13 @@ int* const Memory_pool_int::get_int()
         if(ptr_pool_list_[iter_] == nullptr)
         {
             ptr_pool_list_[iter_] = &ptr_pool_[iter_];
-            std::cout << "Выделена память под адресом " << ptr_pool_list_[iter_] << std::endl;
+            //std::cout << "Выделена память под адресом " << ptr_pool_list_[iter_] << std::endl;
             iter_++;
             return ptr_pool_list_[iter_-1];
         }
         iter_++;
     }
-    std::cout << "Нет места для нового значения, освободите старое" << std::endl;
+    //std::cout << "Нет места для нового значения, освободите старое" << std::endl;
     return nullptr;
 }
 
@@ -49,8 +49,7 @@ int* const Memory_pool_int::get_next_int_ptr()
         iter_++;
         return ptr_pool_list_[iter_ -1];
     }
-
-
+    return nullptr;
 }
 
 void Memory_pool_int::delete_int(int* const ptr)
@@ -100,7 +99,7 @@ void Memory_pool_int::delete_last_int() // Если итератор на поз
 
 }
 
-void Memory_pool_int::print_all_nums()
+std::string Memory_pool_int::print_all_nums()
 {
     std::cout << "Последний полученный адрес = " << iter_ << std::endl;
     for(int i = 0; i < size_of_pool_; i++)
@@ -108,13 +107,14 @@ void Memory_pool_int::print_all_nums()
         std::cout<< "Адрес " << ptr_pool_list_[i] << " = ";
         std::cout << ptr_pool_[i] << std::endl;
     }
+    return "";// ДОПИСАТЬ
 }
 
 Memory_pool_int::~Memory_pool_int()
 {
     delete[] ptr_pool_;
     delete[] ptr_pool_list_;
-    std::cout << "Memory pool удалена" << std::endl;
+    //std::cout << "Memory pool удалена" << std::endl;
 }
 
 
